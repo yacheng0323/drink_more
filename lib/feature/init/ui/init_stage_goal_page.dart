@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class InitStageGoalPage extends StatefulWidget {
@@ -309,7 +310,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                             child: GradientButton(
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  // context.push("/DrinkMorePage");
+                                  context.go("/NavScaffold");
                                 }
                               },
                               text: 'Start',
