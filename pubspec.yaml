@@ -37,6 +37,9 @@ dependencies:
   step_progress_indicator: ^1.0.2 
   persistent_bottom_nav_bar: ^6.2.1 
   table_calendar: ^3.1.2
+  flutter_echarts: ^2.5.0
+  webview_flutter: ^4.8.0
+  fl_chart: ^0.68.0 
 
 dev_dependencies:
   flutter_test:
