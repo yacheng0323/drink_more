@@ -30,17 +30,41 @@ class _NavScaffoldState extends State<NavScaffold> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         onTap: (value) {
           setState(() {
             currentIndex = value;
           });
         },
+        selectedItemColor: const Color(0xff0079AC),
+        unselectedItemColor: Colors.grey,
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
         items: [
-          BottomNavigationBarItem(label: "", icon: Icon(Icons.home_outlined)),
-          BottomNavigationBarItem(label: "", icon: Icon(Icons.calendar_month_outlined)),
-          BottomNavigationBarItem(label: "", icon: Icon(Icons.bar_chart_sharp)),
-          BottomNavigationBarItem(label: "", icon: Icon(Symbols.shelf_auto_hide)),
+          BottomNavigationBarItem(
+              label: "",
+              icon: Icon(
+                Icons.home_outlined,
+              )),
+          BottomNavigationBarItem(
+              label: "",
+              icon: Icon(
+                Icons.calendar_month_outlined,
+              )),
+          BottomNavigationBarItem(
+              label: "",
+              icon: Icon(
+                Icons.bar_chart_sharp,
+              )),
+          BottomNavigationBarItem(
+              label: "",
+              icon: Icon(
+                Symbols.shelf_auto_hide,
+              )),
         ],
       ),
     );
