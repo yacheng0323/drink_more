@@ -1,7 +1,10 @@
+import 'package:drink_more/config/injections.dart';
 import 'package:drink_more/config/router.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initInjections();
   runApp(const DrinkMoreApp());
 }
 
