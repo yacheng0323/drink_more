@@ -14,7 +14,9 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class InitStageGoalPage extends StatefulWidget {
-  const InitStageGoalPage({super.key});
+  const InitStageGoalPage({super.key, required this.dailyGoal});
+
+  final double dailyGoal;
 
   @override
   State<InitStageGoalPage> createState() => _InitStageGoalPageState();
@@ -122,7 +124,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                                   textAlign: TextAlign.center,
                                   style: TextGetter.headline5?.copyWith(color: DrinkMoreColors.textFieldTextColor, fontWeight: FontWeight.w500),
                                   inputFormatters: [
-                                    LengthLimitingTextInputFormatter(10),
+                                    LengthLimitingTextInputFormatter(4),
                                     FilteringTextInputFormatter.digitsOnly,
                                     FilteringTextInputFormatter.allow(RegExp(r'^[1-9]\d*')),
                                   ],
@@ -310,7 +312,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                             child: GradientButton(
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  context.go("/NavScaffold");
+                                  bloc.add(Submit(dailyGoal: widget.dailyGoal, stageGoal: double.parse(controller.text), scheduledTimes: times));
                                 }
                               },
                               text: 'Start',
@@ -324,8 +326,25 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
               );
             },
             listener: (context, state) {
-              if (state.status == InitStageGoalStatus.failure) {
-                ShowSnackBarHelper.errorSnackBar(context: context).showSnackbar("Cannot add duplicate times");
+              switch (state.status) {
+                case InitStageGoalStatus.initial:
+                  break;
+                case InitStageGoalStatus.success:
+                  context.go("/NavScaffold");
+
+                  break;
+                case InitStageGoalStatus.addTimeSuccess:
+                  break;
+                case InitStageGoalStatus.addTimeFailure:
+                  ShowSnackBarHelper.errorSnackBar(context: context).showSnackbar("Cannot add duplicate times");
+
+                  break;
+                case InitStageGoalStatus.startError:
+                  ShowSnackBarHelper.errorSnackBar(context: context).showSnackbar("Unidentified Failure");
+
+                  break;
+                case InitStageGoalStatus.loading:
+                  break;
               }
             },
           )),

@@ -9,12 +9,17 @@ class DatabaseService {
     return await _dbHelper.database;
   }
 
-  Future<void> insertWaterGoal(DateTime date, double dailyGoal) async {
+  Future<bool> hasTableData(String tableName) async {
     final db = await database;
-    String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+    final List<Map<String, dynamic>> result = await db.rawQuery('SELECT COUNT(*) as count FROM $tableName');
+    return result.isNotEmpty && result.first['count'] > 0;
+  }
+
+  Future<void> insertWaterGoal(double dailyGoal) async {
+    final db = await database;
     await db.insert(
       'WaterGoals',
-      {'date': formattedDate, 'dailyGoal': dailyGoal},
+      {'dailyGoal': dailyGoal},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
@@ -38,27 +43,24 @@ class DatabaseService {
     );
   }
 
-  Future<void> insertReminder(String time) async {
+  Future<void> insertReminder(List<int> timesInSeconds) async {
     final db = await database;
-    await db.insert(
-      'Reminders',
-      {'time': time},
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    for (int seconds in timesInSeconds) {
+      await db.insert(
+        'Reminders',
+        {'time': seconds},
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
   }
 
-  Future<Map<String, dynamic>?> getWaterGoal(DateTime date) async {
+  Future<Map<String, dynamic>?> getWaterGoal() async {
     final db = await database;
-    String formattedDate = DateFormat('yyyy-MM-dd').format(date);
-
-    final List<Map<String, dynamic>> maps = await db.query(
-      'WaterGoals',
-      where: 'date = ?',
-      whereArgs: [formattedDate],
-    );
+    final List<Map<String, dynamic>> maps = await db.query('WaterGoals');
     if (maps.isNotEmpty) {
       return maps.first;
     }
+
     return null;
   }
 
@@ -73,9 +75,11 @@ class DatabaseService {
     );
   }
 
-  Future<List<Map<String, dynamic>>> getReminders() async {
+  Future<List<int>> getReminders() async {
     final db = await database;
-    return await db.query('Reminders');
+    final List<Map<String, dynamic>> maps = await db.query('Reminders');
+
+    return maps.map((map) => map['time'] as int).toList();
   }
 
   Future<double> getTotalWaterAmount(DateTime date) async {
@@ -98,5 +102,16 @@ class DatabaseService {
   Future<List<Map<String, dynamic>>> getStageGoals() async {
     final db = await database;
     return await db.query('StageGoals');
+  }
+
+  // 更新提醒時間
+  Future<void> updateReminder(int id, int newTime) async {
+    final db = await database;
+    await db.update(
+      'Reminders',
+      {'time': newTime},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }

@@ -29,5 +29,7 @@ enum InitStageGoalStatus {
   initial,
   loading,
   success,
-  failure,
+  addTimeSuccess,
+  addTimeFailure,
+  startError,
 }

@@ -16,7 +16,10 @@ GoRouter router = GoRouter(
     ),
     GoRoute(
       path: "/InitStageGoal",
-      builder: (context, state) => const InitStageGoalPage(),
+      builder: (context, state) {
+        final args = state.extra as double?;
+        return InitStageGoalPage(dailyGoal: (args ?? 0));
+      },
     ),
     GoRoute(
       path: "/NavScaffold",

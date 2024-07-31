@@ -22,7 +22,7 @@ class _NavScaffoldState extends State<NavScaffold> {
     return Scaffold(
       body: IndexedStack(
         index: currentIndex,
-        children: [
+        children: const [
           DrinkMorePage(),
           CalendarPage(),
           ChartPage(),

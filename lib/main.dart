@@ -1,6 +1,11 @@
 import 'package:drink_more/config/injections.dart';
 import 'package:drink_more/config/router.dart';
+import 'package:drink_more/core/database/database_service.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +28,6 @@ class _DrinkMoreAppState extends State<DrinkMoreApp> {
       title: "Drink More",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
     );

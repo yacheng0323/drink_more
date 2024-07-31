@@ -32,7 +32,6 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE WaterGoals (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        date TEXT NOT NULL UNIQUE,
         dailyGoal REAL NOT NULL
       )
     ''');
@@ -49,7 +48,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE Reminders (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        time TEXT NOT NULL
+        time INTEGER NOT NULL
       )
     ''');
 
