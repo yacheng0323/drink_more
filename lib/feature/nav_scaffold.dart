@@ -3,6 +3,7 @@ import 'package:drink_more/feature/chart/ui/chart_page.dart';
 import 'package:drink_more/feature/drinkhome/ui/drink_more_page.dart';
 import 'package:drink_more/feature/setting/ui/setting_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class NavScaffold extends StatefulWidget {
@@ -20,7 +21,7 @@ class _NavScaffoldState extends State<NavScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
+      body: LazyIndexedStack(
         index: currentIndex,
         children: const [
           DrinkMorePage(),
@@ -44,7 +45,7 @@ class _NavScaffoldState extends State<NavScaffold> {
         unselectedItemColor: Colors.grey,
         selectedFontSize: 0,
         unselectedFontSize: 0,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               label: "",
               icon: Icon(

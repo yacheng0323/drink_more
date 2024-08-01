@@ -243,7 +243,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                                                               bloc.add(AddTime(dateTime: (DateFormat("a        hh:mm").parse(timeController.text))));
                                                               Navigator.of(context).pop();
                                                             },
-                                                            text: 'Add',
+                                                            text: "Add",
                                                             padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                                                             textStyle: TextGetter.bodyText1?.copyWith(color: Colors.white),
                                                             gradient: DrinkMoreColors.buttonBackgroundColor,
@@ -293,7 +293,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                                         ),
                                       ),
                                       Text(
-                                        DateFormat("a       hh:mm").format(DatetimeUsecase.timeFromSeconds(times[index])),
+                                        DateFormat("a       hh:mm").format(DatetimeUsecase.timeFromSeconds(times[index].seconds)),
                                         style: TextGetter.headline5?.copyWith(color: const Color(0xff787878)),
                                       )
                                     ],

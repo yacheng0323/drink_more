@@ -1,3 +1,4 @@
+import 'package:drink_more/entities/local/reminder_model.dart';
 import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:drink_more/core/database/database_helper.dart';
@@ -43,14 +44,21 @@ class DatabaseService {
     );
   }
 
-  Future<void> insertReminder(List<int> timesInSeconds) async {
+  Future<void> insertReminder(List<ReminderModel> timesInSeconds) async {
     final db = await database;
-    for (int seconds in timesInSeconds) {
-      await db.insert(
+    for (ReminderModel reminder in timesInSeconds) {
+      final List<Map<String, dynamic>> maps = await db.query(
         'Reminders',
-        {'time': seconds},
-        conflictAlgorithm: ConflictAlgorithm.replace,
+        where: 'time = ?',
+        whereArgs: [reminder.seconds],
       );
+      if (maps.isEmpty) {
+        await db.insert(
+          'Reminders',
+          {'time': reminder.seconds},
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      }
     }
   }
 
@@ -75,11 +83,21 @@ class DatabaseService {
     );
   }
 
-  Future<List<int>> getReminders() async {
+  // 取得所有飲水記錄
+  Future<List<Map<String, dynamic>>> getAllWaterRecords() async {
+    final db = await database;
+    return await db.query('WaterRecords');
+  }
+
+  Future<List<ReminderModel>> getReminders() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('Reminders');
 
-    return maps.map((map) => map['time'] as int).toList();
+    return maps.map((map) {
+      int id = map['id'] as int;
+      int seconds = map['time'] as int;
+      return ReminderModel(id: id, seconds: seconds);
+    }).toList();
   }
 
   Future<double> getTotalWaterAmount(DateTime date) async {
@@ -110,6 +128,16 @@ class DatabaseService {
     await db.update(
       'Reminders',
       {'time': newTime},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  // 刪除提醒時間
+  Future<void> deleteReminder(int id) async {
+    final db = await database;
+    await db.delete(
+      'Reminders',
       where: 'id = ?',
       whereArgs: [id],
     );

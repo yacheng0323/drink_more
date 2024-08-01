@@ -14,3 +14,15 @@ class UpdateScheduledTimes extends DrinkMoreEvent {
 
   UpdateScheduledTimes({required this.id, required this.second});
 }
+
+class DeleteScheduledTimes extends DrinkMoreEvent {
+  final int id;
+
+  DeleteScheduledTimes({required this.id});
+}
+
+class AddNewScheduledTimes extends DrinkMoreEvent {
+  final DateTime time;
+
+  AddNewScheduledTimes({required this.time});
+}

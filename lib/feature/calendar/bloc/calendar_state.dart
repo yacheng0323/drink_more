@@ -1,10 +1,9 @@
-import 'package:drink_more/entities/local/reminder_model.dart';
 import 'package:equatable/equatable.dart';
 
-class DrinkMoreState extends Equatable {
-  final DrinkMoreStatus status;
+class CalendarState extends Equatable {
+  final CalendarStatus status;
 
-  final List<ReminderModel>? scheduledTimes;
+  final DateTime? selectDate;
 
   final double? dailyGoal;
 
@@ -12,45 +11,49 @@ class DrinkMoreState extends Equatable {
 
   final double? amount;
 
-  const DrinkMoreState({
+  final List<DateTime>? markedDates;
+
+  const CalendarState({
     required this.status,
-    this.scheduledTimes,
+    this.selectDate,
     this.dailyGoal,
     this.stageGoal,
     this.amount,
+    this.markedDates,
   });
 
-  DrinkMoreState copyWith({
-    DrinkMoreStatus? status,
-    List<ReminderModel>? scheduledTimes,
+  CalendarState copyWith({
+    CalendarStatus? status,
+    DateTime? selectDate,
     double? dailyGoal,
     double? stageGoal,
     double? amount,
+    List<DateTime>? markedDates,
   }) {
-    return DrinkMoreState(
+    return CalendarState(
       status: status ?? this.status,
-      scheduledTimes: scheduledTimes ?? this.scheduledTimes,
+      selectDate: selectDate ?? this.selectDate,
       dailyGoal: dailyGoal ?? this.dailyGoal,
       stageGoal: stageGoal ?? this.stageGoal,
       amount: amount ?? this.amount,
+      markedDates: markedDates ?? this.markedDates,
     );
   }
 
   @override
   List<Object?> get props => [
         status,
-        scheduledTimes,
+        selectDate,
         dailyGoal,
         stageGoal,
         amount,
+        markedDates,
       ];
 }
 
-enum DrinkMoreStatus {
+enum CalendarStatus {
   initial,
   loading,
   success,
   failure,
-  addTimeFailure,
-  addTimeSuccess,
 }

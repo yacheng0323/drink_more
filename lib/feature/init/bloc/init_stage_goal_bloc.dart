@@ -1,4 +1,5 @@
 import 'package:drink_more/core/database/database_service.dart';
+import 'package:drink_more/entities/local/reminder_model.dart';
 import 'package:drink_more/feature/init/bloc/init_stage_goal_event.dart';
 import 'package:drink_more/feature/init/bloc/init_stage_goal_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +19,15 @@ class InitStageGoalBloc extends Bloc<InitStageGoalEvent, InitStageGoalState> {
     int minute = event.dateTime.minute;
     int totalSeconds = hour * 3600 + minute * 60;
 
-    List<int> list = List.from(state.scheduledTimes ?? []);
-    list.contains(totalSeconds) ? emit.call(state.copyWith(status: InitStageGoalStatus.addTimeFailure)) : list.add(totalSeconds);
-
-    emit.call(state.copyWith(status: InitStageGoalStatus.addTimeSuccess, scheduledTimes: list));
+    List<ReminderModel> list = List.from(state.scheduledTimes ?? []);
+    bool exists = list.any((reminder) => reminder.seconds == totalSeconds);
+    if (exists) {
+      emit(state.copyWith(status: InitStageGoalStatus.addTimeFailure));
+    } else {
+      int newId = list.isNotEmpty ? list.last.id + 1 : 1;
+      list.add(ReminderModel(id: newId, seconds: totalSeconds));
+      emit(state.copyWith(scheduledTimes: list, status: InitStageGoalStatus.addTimeSuccess));
+    }
   }
 
   Future<void> submit(

@@ -1,3 +1,5 @@
+import 'package:drink_more/entities/local/reminder_model.dart';
+
 abstract class InitStageGoalEvent {}
 
 class StageGoalInit extends InitStageGoalEvent {}
@@ -12,7 +14,7 @@ class Submit extends InitStageGoalEvent {
   final double dailyGoal;
   final double stageGoal;
 
-  final List<int> scheduledTimes;
+  final List<ReminderModel> scheduledTimes;
 
   Submit({required this.dailyGoal, required this.stageGoal, required this.scheduledTimes});
 }
