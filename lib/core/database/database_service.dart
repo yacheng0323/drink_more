@@ -10,12 +10,14 @@ class DatabaseService {
     return await _dbHelper.database;
   }
 
+  // 確認有無已建立的飲水表
   Future<bool> hasTableData(String tableName) async {
     final db = await database;
     final List<Map<String, dynamic>> result = await db.rawQuery('SELECT COUNT(*) as count FROM $tableName');
     return result.isNotEmpty && result.first['count'] > 0;
   }
 
+  // 插入每日飲水目標
   Future<void> insertWaterGoal(double dailyGoal) async {
     final db = await database;
     await db.insert(
@@ -25,6 +27,7 @@ class DatabaseService {
     );
   }
 
+  // 插入stage目標
   Future<void> insertStageGoal(double amount) async {
     final db = await database;
     await db.insert(
@@ -141,5 +144,40 @@ class DatabaseService {
       where: 'id = ?',
       whereArgs: [id],
     );
+  }
+
+  Future<void> updateStageGoal(int id, double amount) async {
+    final db = await database;
+    await db.update(
+      'StageGoals',
+      {'amount': amount},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> updateDailyGoal(int id, double dailyGoal) async {
+    final db = await database;
+    await db.update(
+      'WaterGoals',
+      {'dailyGoal': dailyGoal},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  // 清空所有表的數據
+  Future<void> clearAllTables() async {
+    final db = await database;
+
+    final List<Map<String, dynamic>> tables = await db.rawQuery('SELECT name FROM sqlite_master WHERE type = "table"');
+
+    //  清空所有表的数据
+    for (var table in tables) {
+      final tableName = table['name'];
+      if (tableName != 'sqlite_sequence') {
+        await db.execute('DELETE FROM $tableName');
+      }
+    }
   }
 }

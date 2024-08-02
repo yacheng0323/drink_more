@@ -58,6 +58,21 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
               fontWeight: FontWeight.w700,
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                bloc.add(DrinkMoreInit());
+              },
+              icon: const CircleAvatar(
+                radius: 20,
+                backgroundColor: Color(0xff2CBAD4),
+                child: Icon(
+                  Icons.refresh,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
         ),
         body: BlocProvider<DrinkMoreBloc>(
           create: (context) => bloc,

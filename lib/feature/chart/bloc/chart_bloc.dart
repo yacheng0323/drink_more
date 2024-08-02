@@ -30,21 +30,23 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
       double dailyGoal = getWaterGoal["dailyGoal"];
 
       List<Map<String, dynamic>> getAllRecords = await dbService.getAllWaterRecords();
+      // final s =
       List<BarChartGroupData> barChartData = [];
 
       // 前7後7 的天數
       List<DateTime> dateList = getDateList();
 
-      for (DateTime date in dateList) {
+      await Future.forEach(dateList, (DateTime date) async {
         bool found = false;
         for (var element in getAllRecords) {
           if (element["date"] != null) {
             DateTime recordDate = DateTime.parse(element["date"]);
             if (isSameDay(date, recordDate)) {
-              double amount = element["amount"];
+              double amount = await dbService.getTotalWaterAmount(DateTime.parse(element["date"]));
               barChartData.add(
                 BarChartGroupData(
                   x: date.day,
+                  barsSpace: 2,
                   barRods: [
                     BarChartRodData(
                       toY: amount,
@@ -63,6 +65,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
           barChartData.add(
             BarChartGroupData(
               x: date.day,
+              barsSpace: 2,
               barRods: [
                 BarChartRodData(
                   toY: 0,
@@ -72,7 +75,7 @@ class ChartBloc extends Bloc<ChartEvent, ChartState> {
             ),
           );
         }
-      }
+      });
 
       emit.call(state.copyWith(status: ChartStatus.success, amount: amount, dailyGoal: dailyGoal, barChartData: barChartData, selectedDay: DateTime.now()));
     } catch (e) {

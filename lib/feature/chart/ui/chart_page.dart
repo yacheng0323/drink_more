@@ -43,6 +43,21 @@ class _ChartPageState extends State<ChartPage> {
             fontWeight: FontWeight.w700,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              bloc.add(ChartInit());
+            },
+            icon: const CircleAvatar(
+              radius: 20,
+              backgroundColor: Color(0xff2CBAD4),
+              child: Icon(
+                Icons.refresh,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
       body: BlocProvider<ChartBloc>(
         create: (context) => bloc,

@@ -44,6 +44,21 @@ class _CalendarPageState extends State<CalendarPage> {
             fontWeight: FontWeight.w700,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              bloc.add(CalendarInit());
+            },
+            icon: const CircleAvatar(
+              radius: 20,
+              backgroundColor: Color(0xff2CBAD4),
+              child: Icon(
+                Icons.refresh,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
       body: BlocProvider<CalendarBloc>(
         create: (context) => bloc,
