@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
-  SettingBloc(SettingState initialState) : super(initialState) {
+  SettingBloc(super.initialState) {
     on<SettingInit>(init);
     on<SaveDailyGoal>(saveDailyGoal);
     on<SaveStageGoal>(saveStageGoal);

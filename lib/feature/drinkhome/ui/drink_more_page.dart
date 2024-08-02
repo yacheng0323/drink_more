@@ -139,13 +139,13 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                           children: [
                             Text(
                               amount.toStringAsFixed(0),
-                              style: TextGetter.headline3?.copyWith(color: Color(0xff0079AC), fontWeight: FontWeight.w700),
+                              style: TextGetter.headline3?.copyWith(color: const Color(0xff0079AC), fontWeight: FontWeight.w700),
                             ),
                             Row(
                               children: [
                                 Text(
                                   "/${dailyGoal.toStringAsFixed(0)}ml",
-                                  style: TextGetter.headline5?.copyWith(color: Color(0xff2E2E2E), fontWeight: FontWeight.w400),
+                                  style: TextGetter.headline5?.copyWith(color: const Color(0xff2E2E2E), fontWeight: FontWeight.w400),
                                 ),
                                 const Spacer(),
                                 Container(
@@ -234,7 +234,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                                     style: TextGetter.headline6?.copyWith(color: Colors.black, fontWeight: FontWeight.w700),
                                                   ),
                                                   Container(
-                                                    margin: EdgeInsets.fromLTRB(32, 32, 32, 0),
+                                                    margin: const EdgeInsets.fromLTRB(32, 32, 32, 0),
                                                     decoration: BoxDecoration(
                                                       borderRadius: BorderRadius.circular(40),
                                                       gradient: const LinearGradient(
@@ -262,6 +262,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                                         if (value!.isEmpty) {
                                                           return "Please enter your water intake amount";
                                                         }
+                                                        return null;
                                                       },
                                                       keyboardType: TextInputType.number,
                                                       decoration: InputDecoration(
@@ -292,7 +293,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                                             },
                                                             child: Text(
                                                               "Cancel",
-                                                              style: TextGetter.bodyText1?.copyWith(color: Color(0xff0079AC)),
+                                                              style: TextGetter.bodyText1?.copyWith(color: const Color(0xff0079AC)),
                                                             ),
                                                           ),
                                                         ),
@@ -331,7 +332,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                        padding: EdgeInsets.fromLTRB(32, 32, 32, 0),
+                        padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
                         child: Row(
                           children: [
                             Text(
@@ -349,7 +350,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                       builder: (context) {
                                         return Dialog(
                                           child: Container(
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xffA0CDD5)),
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffA0CDD5)),
                                             height: 208,
                                             width: MediaQuery.of(context).size.width,
                                             child: Column(
@@ -412,7 +413,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                                           },
                                                           child: Text(
                                                             "Cancel",
-                                                            style: TextGetter.bodyText1?.copyWith(color: Color(0xff0079AC)),
+                                                            style: TextGetter.bodyText1?.copyWith(color: const Color(0xff0079AC)),
                                                           ),
                                                         ),
                                                       ),
@@ -460,7 +461,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                       builder: (context) {
                                         return Dialog(
                                           child: Container(
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xffA0CDD5)),
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffA0CDD5)),
                                             height: 208,
                                             width: MediaQuery.of(context).size.width,
                                             child: Column(
@@ -526,7 +527,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                                           },
                                                           child: Text(
                                                             "Delete",
-                                                            style: TextGetter.bodyText1?.copyWith(color: Color(0xff0079AC)),
+                                                            style: TextGetter.bodyText1?.copyWith(color: const Color(0xff0079AC)),
                                                           ),
                                                         ),
                                                       ),

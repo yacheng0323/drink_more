@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:drink_more/core/ui/color.dart';
 import 'package:drink_more/core/ui/textstyle.dart';
 import 'package:drink_more/feature/chart/bloc/chart_bloc.dart';
@@ -9,10 +6,8 @@ import 'package:drink_more/feature/chart/bloc/chart_state.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:intl/intl.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class ChartPage extends StatefulWidget {
   const ChartPage({super.key});
@@ -145,7 +140,7 @@ class _ChartPageState extends State<ChartPage> {
                             sideTitles: SideTitles(showTitles: false),
                           ),
                         ),
-                        borderData: FlBorderData(show: true, border: Border.all(color: Color(0xff92CCD9))),
+                        borderData: FlBorderData(show: true, border: Border.all(color: const Color(0xff92CCD9))),
                         barGroups: barChartData,
                         gridData: FlGridData(
                           show: true,
@@ -176,7 +171,7 @@ class _ChartPageState extends State<ChartPage> {
                           style: TextGetter.headline4?.copyWith(color: Colors.white),
                         )),
                     Container(
-                      padding: EdgeInsets.fromLTRB(32, 8, 32, 0),
+                      padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(40),
                         clipBehavior: Clip.antiAlias,
@@ -205,7 +200,7 @@ class _ChartPageState extends State<ChartPage> {
                       padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
                       child: Text(
                         "Target: ${dailyGoal.toStringAsFixed(0)} ml",
-                        style: TextGetter.headline5?.copyWith(color: Color(0xff0079AC)),
+                        style: TextGetter.headline5?.copyWith(color: const Color(0xff0079AC)),
                       ),
                     ),
                     Container(

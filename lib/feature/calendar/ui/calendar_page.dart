@@ -21,7 +21,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   void initState() {
-    bloc = CalendarBloc(CalendarState(status: CalendarStatus.initial));
+    bloc = CalendarBloc(const CalendarState(status: CalendarStatus.initial));
     bloc.add(CalendarInit());
     super.initState();
   }
@@ -123,7 +123,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.transparent,
-                                    border: Border.all(color: Color(0xff06A1BC), width: 2),
+                                    border: Border.all(color: const Color(0xff06A1BC), width: 2),
                                   ),
                                 ),
                               );
@@ -202,7 +202,7 @@ class _CalendarPageState extends State<CalendarPage> {
                       padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
                       child: Text(
                         "Target: ${dailyGoal.toStringAsFixed(0)} ml",
-                        style: TextGetter.headline5?.copyWith(color: Color(0xff0079AC)),
+                        style: TextGetter.headline5?.copyWith(color: const Color(0xff0079AC)),
                       ),
                     )
                   ],

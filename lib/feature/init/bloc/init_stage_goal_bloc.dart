@@ -43,14 +43,6 @@ class InitStageGoalBloc extends Bloc<InitStageGoalEvent, InitStageGoalState> {
       await dbService.insertStageGoal(event.stageGoal);
       await dbService.insertReminder(event.scheduledTimes);
 
-      final a = await dbService.getReminders();
-      final b = await dbService.getStageGoals();
-      final c = await dbService.getWaterGoal();
-
-      print(a);
-      print(b);
-      print(c);
-
       emit.call(state.copyWith(status: InitStageGoalStatus.success));
     } catch (e) {
       emit.call(state.copyWith(status: InitStageGoalStatus.startError));

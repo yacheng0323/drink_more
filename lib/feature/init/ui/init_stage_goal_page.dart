@@ -30,7 +30,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
 
   @override
   void initState() {
-    bloc = InitStageGoalBloc(InitStageGoalState(status: InitStageGoalStatus.initial));
+    bloc = InitStageGoalBloc(const InitStageGoalState(status: InitStageGoalStatus.initial));
     super.initState();
   }
 
@@ -132,6 +132,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                                     if (value!.isEmpty) {
                                       return "Please enter your stage goal";
                                     }
+                                    return null;
                                   },
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
@@ -169,7 +170,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                                         builder: (context) {
                                           return Dialog(
                                             child: Container(
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xffA0CDD5)),
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffA0CDD5)),
                                               height: 208,
                                               width: MediaQuery.of(context).size.width,
                                               child: Column(
@@ -232,7 +233,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                                                             },
                                                             child: Text(
                                                               "Cancel",
-                                                              style: TextGetter.bodyText1?.copyWith(color: Color(0xff0079AC)),
+                                                              style: TextGetter.bodyText1?.copyWith(color: const Color(0xff0079AC)),
                                                             ),
                                                           ),
                                                         ),

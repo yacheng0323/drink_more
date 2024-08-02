@@ -10,7 +10,7 @@ class GradientButton extends StatelessWidget {
   final double minHeight;
 
   const GradientButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.text,
     required this.gradient,
@@ -18,7 +18,7 @@ class GradientButton extends StatelessWidget {
     this.borderRadius = 100.0,
     this.padding = const EdgeInsets.fromLTRB(80, 0, 80, 0),
     this.minHeight = 44.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

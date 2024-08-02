@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -123,7 +122,7 @@ class _SettingPageState extends State<SettingPage> {
                                               style: TextGetter.headline6?.copyWith(color: Colors.black, fontWeight: FontWeight.w700),
                                             ),
                                             Container(
-                                              margin: EdgeInsets.fromLTRB(32, 32, 32, 0),
+                                              margin: const EdgeInsets.fromLTRB(32, 32, 32, 0),
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(40),
                                                 gradient: const LinearGradient(
@@ -151,6 +150,7 @@ class _SettingPageState extends State<SettingPage> {
                                                   if (value!.isEmpty) {
                                                     return "Please enter your daily goal";
                                                   }
+                                                  return null;
                                                 },
                                                 keyboardType: TextInputType.number,
                                                 decoration: InputDecoration(
@@ -181,7 +181,7 @@ class _SettingPageState extends State<SettingPage> {
                                                       },
                                                       child: Text(
                                                         "Cancel",
-                                                        style: TextGetter.bodyText1?.copyWith(color: Color(0xff0079AC)),
+                                                        style: TextGetter.bodyText1?.copyWith(color: const Color(0xff0079AC)),
                                                       ),
                                                     ),
                                                   ),
@@ -251,7 +251,7 @@ class _SettingPageState extends State<SettingPage> {
                                               style: TextGetter.headline6?.copyWith(color: Colors.black, fontWeight: FontWeight.w700),
                                             ),
                                             Container(
-                                              margin: EdgeInsets.fromLTRB(32, 32, 32, 0),
+                                              margin: const EdgeInsets.fromLTRB(32, 32, 32, 0),
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(40),
                                                 gradient: const LinearGradient(
@@ -279,6 +279,7 @@ class _SettingPageState extends State<SettingPage> {
                                                   if (value!.isEmpty) {
                                                     return "Please enter your stage goal";
                                                   }
+                                                  return null;
                                                 },
                                                 keyboardType: TextInputType.number,
                                                 decoration: InputDecoration(
@@ -309,7 +310,7 @@ class _SettingPageState extends State<SettingPage> {
                                                       },
                                                       child: Text(
                                                         "Cancel",
-                                                        style: TextGetter.bodyText1?.copyWith(color: Color(0xff0079AC)),
+                                                        style: TextGetter.bodyText1?.copyWith(color: const Color(0xff0079AC)),
                                                       ),
                                                     ),
                                                   ),
@@ -388,7 +389,7 @@ class _SettingPageState extends State<SettingPage> {
                                             ),
                                           ),
                                           Container(
-                                            padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
+                                            padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
                                             alignment: Alignment.centerLeft,
                                             child: Text(
                                               "Reset",
@@ -396,9 +397,9 @@ class _SettingPageState extends State<SettingPage> {
                                             ),
                                           ),
                                           Container(
-                                            padding: EdgeInsets.fromLTRB(32, 8, 32, 0),
+                                            padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
                                             alignment: Alignment.centerLeft,
-                                            child: Text("All the data will be cleared.\nAre you sure to reset it?"),
+                                            child: const Text("All the data will be cleared.\nAre you sure to reset it?"),
                                           ),
                                           Container(
                                             padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
@@ -416,7 +417,7 @@ class _SettingPageState extends State<SettingPage> {
                                                     },
                                                     child: Text(
                                                       "No",
-                                                      style: TextGetter.bodyText1?.copyWith(color: Color(0xff0079AC)),
+                                                      style: TextGetter.bodyText1?.copyWith(color: const Color(0xff0079AC)),
                                                     ),
                                                   ),
                                                 ),

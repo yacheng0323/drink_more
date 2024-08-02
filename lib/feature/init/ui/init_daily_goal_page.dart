@@ -1,6 +1,5 @@
 import 'package:drink_more/core/database/database_service.dart';
 import 'package:drink_more/core/ui/color.dart';
-import 'package:drink_more/core/ui/gradient_button.dart';
 import 'package:drink_more/core/ui/textstyle.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class InitDailyGoalPage extends StatefulWidget {
   const InitDailyGoalPage({super.key});
@@ -26,7 +23,7 @@ class _InitDailyGoalPageState extends State<InitDailyGoalPage> {
 
   @override
   void initState() {
-    bloc = InitDailyGoalBloc(InitDailyGoalState(status: InitDailyGoalStatus.init));
+    bloc = InitDailyGoalBloc(const InitDailyGoalState(status: InitDailyGoalStatus.init));
     bloc.add(Init());
     super.initState();
   }
@@ -125,6 +122,7 @@ class _InitDailyGoalPageState extends State<InitDailyGoalPage> {
                                     if (value!.isEmpty) {
                                       return "Please enter your daily goal";
                                     }
+                                    return null;
                                   },
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
