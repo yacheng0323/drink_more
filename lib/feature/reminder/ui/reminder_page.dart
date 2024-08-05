@@ -1,5 +1,6 @@
 import 'package:drink_more/core/ui/color.dart';
 import 'package:drink_more/core/ui/gradient_button.dart';
+import 'package:drink_more/core/ui/show_snack_bar.dart';
 import 'package:drink_more/core/ui/textstyle.dart';
 import 'package:drink_more/feature/reminder/bloc/reminder_bloc.dart';
 import 'package:drink_more/feature/reminder/bloc/reminder_event.dart';
@@ -45,7 +46,9 @@ class _ReminderPageState extends State<ReminderPage> {
               case ReminderStatus.initial:
                 break;
               case ReminderStatus.success:
+                ShowSnackBarHelper.successSnackBar(context: context).showSnackbar("Stage goal achieved!");
                 Navigator.of(context).pop();
+
                 break;
               case ReminderStatus.failure:
                 break;
