@@ -422,6 +422,10 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                                       Expanded(
                                                         child: GradientButton(
                                                           onPressed: () async {
+                                                            if (addNewscheduledController.text.isEmpty) {
+                                                              ShowSnackBarHelper.errorSnackBar(context: context).showSnackbar("Please select a time");
+                                                              return;
+                                                            }
                                                             bloc.add(AddNewScheduledTimes(time: (DateFormat("a        hh:mm").parse(addNewscheduledController.text))));
                                                             Navigator.of(context).pop();
                                                           },

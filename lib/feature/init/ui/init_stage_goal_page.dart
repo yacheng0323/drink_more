@@ -270,7 +270,7 @@ class _InitStageGoalPageState extends State<InitStageGoalPage> {
                         ),
                         Expanded(
                           child: Container(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 130),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                             child: ListView.builder(
                               padding: const EdgeInsets.fromLTRB(32, 24, 80, 24),
                               itemBuilder: (context, index) {

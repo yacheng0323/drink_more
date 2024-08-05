@@ -29,6 +29,7 @@ class DrinkMoreBloc extends Bloc<DrinkMoreEvent, DrinkMoreState> {
       double dailyGoal = getWaterGoal["dailyGoal"];
 
       List<ReminderModel> scheduledTimes = await dbService.getReminders();
+      scheduledTimes.sort((a, b) => a.seconds.compareTo(b.seconds));
 
       emit.call(state.copyWith(status: DrinkMoreStatus.success, dailyGoal: dailyGoal, amount: amount, scheduledTimes: scheduledTimes));
     } catch (e) {
@@ -82,6 +83,8 @@ class DrinkMoreBloc extends Bloc<DrinkMoreEvent, DrinkMoreState> {
         await dbService.insertReminder(list);
         List<ReminderModel> scheduledTimes = await dbService.getReminders();
         await LocalNotification.scheduleWaterReminders();
+        scheduledTimes.sort((a, b) => a.seconds.compareTo(b.seconds));
+
         emit(state.copyWith(status: DrinkMoreStatus.success, scheduledTimes: scheduledTimes));
       }
     } catch (e) {
@@ -101,6 +104,7 @@ class DrinkMoreBloc extends Bloc<DrinkMoreEvent, DrinkMoreState> {
       await dbService.updateReminder(event.id, event.second);
       List<ReminderModel> scheduledTimes = await dbService.getReminders();
       await LocalNotification.scheduleWaterReminders();
+      scheduledTimes.sort((a, b) => a.seconds.compareTo(b.seconds));
 
       emit.call(state.copyWith(status: DrinkMoreStatus.success, scheduledTimes: scheduledTimes));
     } catch (e) {
@@ -120,6 +124,7 @@ class DrinkMoreBloc extends Bloc<DrinkMoreEvent, DrinkMoreState> {
       await dbService.deleteReminder(event.id);
       List<ReminderModel> scheduledTimes = await dbService.getReminders();
       await LocalNotification.scheduleWaterReminders();
+      scheduledTimes.sort((a, b) => a.seconds.compareTo(b.seconds));
 
       emit.call(state.copyWith(status: DrinkMoreStatus.success, scheduledTimes: scheduledTimes));
     } catch (e) {
