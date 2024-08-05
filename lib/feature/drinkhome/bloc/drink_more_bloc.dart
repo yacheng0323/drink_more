@@ -2,6 +2,7 @@ import 'package:drink_more/core/database/database_service.dart';
 import 'package:drink_more/entities/local/reminder_model.dart';
 import 'package:drink_more/feature/drinkhome/bloc/drink_more_event.dart';
 import 'package:drink_more/feature/drinkhome/bloc/drink_more_state.dart';
+import 'package:drink_more/feature/local_notification.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -80,6 +81,7 @@ class DrinkMoreBloc extends Bloc<DrinkMoreEvent, DrinkMoreState> {
 
         await dbService.insertReminder(list);
         List<ReminderModel> scheduledTimes = await dbService.getReminders();
+        await LocalNotification.scheduleWaterReminders();
         emit(state.copyWith(status: DrinkMoreStatus.success, scheduledTimes: scheduledTimes));
       }
     } catch (e) {
@@ -98,6 +100,8 @@ class DrinkMoreBloc extends Bloc<DrinkMoreEvent, DrinkMoreState> {
 
       await dbService.updateReminder(event.id, event.second);
       List<ReminderModel> scheduledTimes = await dbService.getReminders();
+      await LocalNotification.scheduleWaterReminders();
+
       emit.call(state.copyWith(status: DrinkMoreStatus.success, scheduledTimes: scheduledTimes));
     } catch (e) {
       emit.call(state.copyWith(status: DrinkMoreStatus.failure));
@@ -115,6 +119,8 @@ class DrinkMoreBloc extends Bloc<DrinkMoreEvent, DrinkMoreState> {
 
       await dbService.deleteReminder(event.id);
       List<ReminderModel> scheduledTimes = await dbService.getReminders();
+      await LocalNotification.scheduleWaterReminders();
+
       emit.call(state.copyWith(status: DrinkMoreStatus.success, scheduledTimes: scheduledTimes));
     } catch (e) {
       emit.call(state.copyWith(status: DrinkMoreStatus.failure));

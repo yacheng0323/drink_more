@@ -4,7 +4,9 @@ import 'package:drink_more/feature/drinkhome/ui/drink_more_page.dart';
 import 'package:drink_more/feature/init/ui/init_daily_goal_page.dart';
 import 'package:drink_more/feature/init/ui/init_stage_goal_page.dart';
 import 'package:drink_more/feature/nav_scaffold.dart';
+import 'package:drink_more/feature/reminder/ui/reminder_page.dart';
 import 'package:drink_more/feature/setting/ui/setting_page.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter router = GoRouter(
@@ -19,6 +21,14 @@ GoRouter router = GoRouter(
       builder: (context, state) {
         final args = state.extra as double?;
         return InitStageGoalPage(dailyGoal: (args ?? 0));
+      },
+    ),
+    GoRoute(
+      path: '/Reminder',
+      builder: (context, state) {
+        final args = state.extra as String?;
+        final seconds = int.parse(args ?? "0");
+        return ReminderPage(seconds: seconds);
       },
     ),
     GoRoute(

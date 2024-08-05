@@ -7,6 +7,7 @@ import 'package:drink_more/entities/local/reminder_model.dart';
 import 'package:drink_more/feature/drinkhome/bloc/drink_more_bloc.dart';
 import 'package:drink_more/feature/drinkhome/bloc/drink_more_event.dart';
 import 'package:drink_more/feature/drinkhome/bloc/drink_more_state.dart';
+import 'package:drink_more/feature/local_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -420,7 +421,7 @@ class _DrinkMorePageState extends State<DrinkMorePage> {
                                                       const SizedBox(width: 8),
                                                       Expanded(
                                                         child: GradientButton(
-                                                          onPressed: () {
+                                                          onPressed: () async {
                                                             bloc.add(AddNewScheduledTimes(time: (DateFormat("a        hh:mm").parse(addNewscheduledController.text))));
                                                             Navigator.of(context).pop();
                                                           },

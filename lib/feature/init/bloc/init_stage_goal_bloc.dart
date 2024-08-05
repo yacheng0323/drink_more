@@ -2,6 +2,7 @@ import 'package:drink_more/core/database/database_service.dart';
 import 'package:drink_more/entities/local/reminder_model.dart';
 import 'package:drink_more/feature/init/bloc/init_stage_goal_event.dart';
 import 'package:drink_more/feature/init/bloc/init_stage_goal_state.dart';
+import 'package:drink_more/feature/local_notification.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -42,6 +43,7 @@ class InitStageGoalBloc extends Bloc<InitStageGoalEvent, InitStageGoalState> {
       await dbService.insertWaterGoal(event.dailyGoal);
       await dbService.insertStageGoal(event.stageGoal);
       await dbService.insertReminder(event.scheduledTimes);
+      await LocalNotification.scheduleWaterReminders();
 
       emit.call(state.copyWith(status: InitStageGoalStatus.success));
     } catch (e) {
